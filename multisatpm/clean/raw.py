@@ -1,8 +1,11 @@
 import xarray as xr
 
-from util.env import src_path
+from multisatpm.util.env import src_path
 
-ds = xr.open_dataset('M:/EPA_AirPollution/Data/multisatpm/src/GlobalGWR_PM25_GL_200801_200812-RH35_NoDust_NoSalt.nc')
-df = ds.to_dataframe()
+nc_file = xr.open_dataset(src_path(
+        'GlobalGWR_PM25_GL_200801_200812-RH35_NoDust_NoSalt.nc')
+        )
+
+df = nc_file.to_dataframe()
 
 df.index
