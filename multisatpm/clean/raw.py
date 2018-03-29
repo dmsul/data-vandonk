@@ -6,18 +6,6 @@ from econtools import load_or_build
 from multisatpm.util.env import src_path, data_path
 
 
-@load_or_build(data_path('multisat_conus.pkl'))
-def multisat_conus():
-
-    full_df = pd.concat(
-        [multisat_conus_year(year).squeeze().to_frame(year)
-         for year in range(1998, 2017)],
-        axis='columns',
-    )
-
-    return full_df
-
-
 @load_or_build(data_path('multisat_conus_{}.pkl'), path_args=[0])
 def multisat_conus_year(year):
 
@@ -60,4 +48,4 @@ def load_multisat_year(year):
 
 
 if __name__ == '__main__':
-    df = multisat_conus()
+    pass
