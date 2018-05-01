@@ -6,10 +6,17 @@ from econtools import load_or_build
 from multisatpm.util.env import src_path, data_path
 
 
-@load_or_build(data_path('multisat_conus_{}.pkl'), path_args=[0])
-def multisat_conus_year(year):
+@load_or_build(data_path('multisat_conus_{}_{}.pkl'), path_args=[0, 'nodust'])
+def multisat_conus_year(year, nodust=False):
 
-    df = load_multisat_year(year)
+    df = load_multisat_year(year, nodust=nodust)
+
+    df = _restrict_to_conus(df)
+
+    return df
+
+
+def _restrict_to_conus(df):
 
     # Restrict to CONUS
     x0 = -124.7844079
@@ -23,7 +30,7 @@ def multisat_conus_year(year):
     return df_conus
 
 
-def load_multisat_year(year):
+def load_multisat_year(year, nodust=False):
     """ data src: http://fizz.phys.dal.ca/~atmos/martin/?page_id=140 """
     if year in tuple(range(1998, 2008)):
         filepath = (f'GlobalGWRwUni_PM25_GL_{year}01_{year}'
@@ -33,6 +40,9 @@ def load_multisat_year(year):
                     '12-RH35_NoDust_NoSalt.nc')
     else:
         raise ValueError(f"Incorrect `year` {year}")
+
+    if not nodust:
+        filepath = filepath.replace('_NoDust_NoSalt', '')
 
     filepath = src_path(filepath)
 
