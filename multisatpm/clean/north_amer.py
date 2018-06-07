@@ -1,12 +1,52 @@
 import os
 import zipfile
+from urllib.request import urlretrieve
+
 import numpy as np
 import pandas as pd
+import xarray as xr
 
 from econtools import load_or_build
 
 from multisatpm.util.env import src_path, data_path
 from multisatpm.util import _restrict_to_conus
+
+file_format = 'GWRwSPEC_PM25_NA_{0}01_{0}12-RH35.nc'
+
+
+@load_or_build(data_path('northamer_1year_{}.pkl'), path_args=[0])
+def msat_northamer_1year(year):
+    df = msat_northamer_1year_to_df(year)
+    df = _restrict_to_conus(df)
+    df = df.stack('x')
+
+    return df
+
+
+def msat_northamer_1year_to_df(year: int) -> pd.DataFrame:
+    filepath = src_path(file_format.format(year))
+    if not os.path.isfile(filepath):
+        msat_northamer_1year_download(year)
+
+    netcdf = xr.open_dataset(filepath)
+    df = pd.DataFrame(netcdf['PM25'].data)
+    df.index = netcdf['LAT'].data
+    df.columns = netcdf['LON'].data
+
+    df.index.name = 'y'
+    df.columns.name = 'x'
+
+    return df
+
+
+def msat_northamer_1year_download(year):
+    url_root = 'ftp://stetson.phys.dal.ca/Aaron/ForDaniel/'
+    filename = file_format.format(year)
+    url = url_root + filename
+
+    print(f"Downloading msat NA 1year {year}...", end='')
+    urlretrieve(url, filename=src_path(filename))
+    print("Done.")
 
 
 @load_or_build(data_path('northamer_3year_{}.pkl'), path_args=[0])
@@ -76,10 +116,5 @@ def msat_northamer_3year(yearT):
 
 
 if __name__ == '__main__':
-    import sys
-    if len(sys.argv) > 1:
-        year = int(sys.argv[1])
-    else:
-        year = 2012
-
-    df = msat_northamer_conus_3year(year)
+    for y in range(2002, 2016):
+        df = msat_northamer_1year(y)
