@@ -8,7 +8,7 @@ from multisatpm.util import _restrict_to_conus
 
 
 @load_or_build(data_path('multisat_conus_{}_{}.pkl'), path_args=[0, 'nodust'])
-def multisat_conus_year(year, nodust=False):
+def multisat_conus_year(year: int, nodust: bool=False) -> pd.DataFrame:
 
     df = load_multisat_year(year, nodust=nodust)
 
@@ -19,7 +19,7 @@ def multisat_conus_year(year, nodust=False):
     return df
 
 
-def load_multisat_year(year, nodust=False):
+def load_multisat_year(year: int, nodust: bool=False) -> pd.DataFrame:
     """ data src: http://fizz.phys.dal.ca/~atmos/martin/?page_id=140 """
     if year in tuple(range(1998, 2008)):
         filepath = (f'GlobalGWRwUni_PM25_GL_{year}01_{year}'

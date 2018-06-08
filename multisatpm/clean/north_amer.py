@@ -15,7 +15,7 @@ file_format = 'GWRwSPEC_PM25_NA_{0}01_{0}12-RH35.nc'
 
 
 @load_or_build(data_path('northamer_1year_{}.pkl'), path_args=[0])
-def msat_northamer_1year(year):
+def msat_northamer_1year(year: int) -> pd.DataFrame:
     df = msat_northamer_1year_to_df(year)
     df = _restrict_to_conus(df)
     df = df.stack('x')
@@ -39,7 +39,7 @@ def msat_northamer_1year_to_df(year: int) -> pd.DataFrame:
     return df
 
 
-def msat_northamer_1year_download(year):
+def msat_northamer_1year_download(year: int) -> None:
     url_root = 'ftp://stetson.phys.dal.ca/Aaron/ForDaniel/'
     filename = file_format.format(year)
     url = url_root + filename
@@ -50,7 +50,7 @@ def msat_northamer_1year_download(year):
 
 
 @load_or_build(data_path('northamer_3year_{}.pkl'), path_args=[0])
-def msat_northamer_conus_3year(yearT):
+def msat_northamer_conus_3year(yearT: int) -> pd.Series:
     df = msat_northamer_3year(yearT)
 
     df = _restrict_to_conus(df)
@@ -64,7 +64,7 @@ def msat_northamer_conus_3year(yearT):
     return df
 
 
-def msat_northamer_3year(yearT):
+def msat_northamer_3year(yearT: int) -> pd.DataFrame:
     year0 = yearT - 2
     meta_rows = 6
     file_path = src_path('GWR_PM25_NA_{}01_{}12-RH35-NoNegs.asc')
