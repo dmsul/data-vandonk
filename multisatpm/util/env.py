@@ -6,7 +6,7 @@ import socket
 HOST = socket.gethostname()
 if HOST in ('sullivan-7d', 'sullivan-10d'):
     data_root = "D:\\"
-elif HOST == 'DESKTOP-HOME':
+elif HOST in ('DESKTOP-HOME', 'ThinkPad-PC'):
     data_root = "D:\\"
 elif HOST == 'nepf-7d':
     data_root = "M:\\EPA_AirPollution\\"
