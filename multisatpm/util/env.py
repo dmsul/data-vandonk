@@ -11,7 +11,7 @@ elif HOST in ('DESKTOP-HOME', 'ThinkPad-PC'):
 elif HOST == 'nepf-7d':
     data_root = "M:\\EPA_AirPollution\\"
 else:
-    data_root = r'\\Sullivan-7d\d'
+    data_root = r'\\Sullivan-10d'
 
 DATA_PATH = os.path.join(data_root, 'Data', 'multisatpm')
 SRC_PATH = path.join(DATA_PATH, 'src')
