@@ -2,18 +2,16 @@ from os import path
 import os
 import socket
 
+PROJECT_NAME = 'data-multisatpm'
+
 # Check which machine we're on
 HOST = socket.gethostname()
-if HOST in ('sullivan-7d', 'sullivan-10d'):
+if HOST in ('sullivan-7d', 'sullivan-10d', 'DESKTOP-HOME', 'ThinkPad-PC'):
     data_root = "D:\\"
-elif HOST in ('DESKTOP-HOME', 'ThinkPad-PC'):
-    data_root = "D:\\"
-elif HOST == 'nepf-7d':
-    data_root = "M:\\EPA_AirPollution\\"
 else:
     data_root = r'\\Sullivan-10d'
 
-DATA_PATH = os.path.join(data_root, 'Data', 'multisatpm')
+DATA_PATH = os.path.join(data_root, 'Data', PROJECT_NAME)
 SRC_PATH = path.join(DATA_PATH, 'src')
 
 

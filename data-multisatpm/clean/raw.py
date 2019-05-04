@@ -3,8 +3,8 @@ import xarray as xr
 
 from econtools import load_or_build
 
-from multisatpm.util.env import src_path, data_path
-from multisatpm.util import _restrict_to_conus
+from data_multisatpm.util.env import src_path, data_path
+from data_multisatpm.util import _restrict_to_conus
 
 
 @load_or_build(data_path('multisat_conus_{}_{}.pkl'), path_args=[0, 'nodust'])
