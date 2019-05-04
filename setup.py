@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-from data_census.util.env import PROJECT_NAME
+from data_multisatpm.util.env import PROJECT_NAME
 
 
 def readme():
@@ -11,19 +11,26 @@ def readme():
         return ''
 
 
+description = 'Access to van Donkelaar et al. data.'
+
+dependencies = [
+    'cartopy',
+]
+
 setup(
     name=PROJECT_NAME,
     version='0.0.1',
-    description='Easy access to multisatpm data.',
+    description=description,
+    long_description=readme(),
     url=f'http://github.com/dmsul/{PROJECT_NAME}',
     author='Daniel M. Sullivan',
     author_email='sullydm@gmail.com',
+    packages=find_packages(),
     tests_require=[
         'pytest',
     ],
-    packages=find_packages(),
-    package_data={PROJECT_NAME.replace('-', '_'): ["py.typed"]},
     # include_package_data=True,        # To copy stuff in `MANIFEST.in`
     # install_requires=dependencies,
+    package_data={PROJECT_NAME.replace('-', '_'): ["py.typed"]},
     zip_safe=False,
 )
