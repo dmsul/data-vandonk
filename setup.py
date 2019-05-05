@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-from data_multisatpm.util.env import PROJECT_NAME
+from data_vandonk.util.env import PROJECT_NAME
 
 
 def readme():
