@@ -8,8 +8,8 @@ import xarray as xr
 
 from econtools import load_or_build
 
-from data_multisatpm.util.env import src_path, data_path
-from data_multisatpm.util import _restrict_to_conus
+from data_vandonk.util.env import src_path, data_path
+from data_vandonk.util import _restrict_to_conus
 
 file_format = 'GWRwSPEC_PM25_NA_{0}01_{0}12-RH35.nc'
 

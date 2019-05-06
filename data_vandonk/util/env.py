@@ -2,7 +2,7 @@ from os import path
 import os
 import socket
 
-PROJECT_NAME = 'data-multisatpm'
+PROJECT_NAME = 'data-vandonk'
 
 # Check which machine we're on
 HOST = socket.gethostname()
