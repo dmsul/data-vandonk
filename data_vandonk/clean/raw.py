@@ -15,7 +15,7 @@ from data_vandonk.util import _restrict_to_conus
 @load_or_build(data_path('monthly', 'conus_{species}_{year}_{month}.pkl'))
 def vandonk_monthly_conus(year: int, month: int,
                           species: str='PM25') -> pd.DataFrame:
-    df = vandonk_monthly_to_df(year, month, species=species)
+    df = vandonk_monthly_wide(year, month, species=species)
     df = _restrict_to_conus(df)
     df = df.stack('x')
     df.name = f'{species}_{year}_{month}'
@@ -23,7 +23,7 @@ def vandonk_monthly_conus(year: int, month: int,
     return df
 
 
-def vandonk_monthly_to_df(
+def vandonk_monthly_wide(
         year: int, month: int,
         species: str='PM25') -> pd.DataFrame:
     netcdf = vandonk_monthly_netcdf(year, month, species)
