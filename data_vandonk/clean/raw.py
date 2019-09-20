@@ -101,7 +101,7 @@ def vandonk_month_local_path(year: int, month: int, species: str) -> str:
     return local_path
 
 
-# Old annual
+# Old annual GLOBAL
 @load_or_build(data_path('multisat_conus_{}_{}.pkl'), path_args=[0, 'nodust'])
 def multisat_conus_year(year: int, nodust: bool=False) -> pd.DataFrame:
 
@@ -122,6 +122,7 @@ def load_multisat_year(year: int, nodust: bool=False) -> pd.DataFrame:
     elif year in tuple(range(2008, 2017)):
         filepath = (f'GlobalGWR_PM25_GL_{year}01_{year}'
                     '12-RH35_NoDust_NoSalt.nc')
+
     else:
         raise ValueError(f"Incorrect `year` {year}")
 
