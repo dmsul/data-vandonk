@@ -14,6 +14,9 @@ def readme():
 description = 'Access to van Donkelaar et al. data.'
 
 dependencies = [
+    'econtools',
+    'xarray',
+    'pandas',
     'cartopy',
 ]
 

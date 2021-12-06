@@ -14,7 +14,13 @@ from data_vandonk.util import _restrict_to_conus
 # New monthly
 @load_or_build(data_path('monthly', 'conus_{species}_{year}_{month}.pkl'))
 def vandonk_monthly_conus(year: int, month: int,
-                          species: str='PM25') -> pd.DataFrame:
+                          species: str='PM25') -> pd.Series:
+    """
+    A Pandas Series with latitude (`y`) and longitude (`x`) as the DataFrame
+    index. These are the center points of 0.01 degree grid cells (e.g.,
+    -124.775, 49.345). The value of each row of data is the monthly average
+    measure of `species`.
+    """
     df = vandonk_monthly_wide(year, month, species=species)
     df = _restrict_to_conus(df)
     df = df.stack('x')
@@ -45,10 +51,16 @@ def vandonk_monthly_netcdf(year: int, month: int, species: str):
     return netcdf
 
 
-def mass_download_vandonk_monthly(
+def batch_download_vandonk_monthly(
         species: str='PM25',
         start_year: Optional[int]=None, end_year: Optional[int]=None,
         year_list: Iterable[int]=[]) -> None:
+    """
+    Download all monthly files for pollutant `species` between `start_year` and
+    `end_year` OR for all years in `year_list`. AT LEAST ONE of these must be
+    specified or you will get a `ValueError`. Visit FTP site manually (see
+    `_setup_FTP`) to see what years are available.
+    """
 
     if start_year and end_year:
         year_list = range(start_year, end_year + 1)
@@ -101,7 +113,7 @@ def vandonk_month_local_path(year: int, month: int, species: str) -> str:
     return local_path
 
 
-# Old annual
+# Old annual GLOBAL
 @load_or_build(data_path('multisat_conus_{}_{}.pkl'), path_args=[0, 'nodust'])
 def multisat_conus_year(year: int, nodust: bool=False) -> pd.DataFrame:
 
@@ -122,6 +134,7 @@ def load_multisat_year(year: int, nodust: bool=False) -> pd.DataFrame:
     elif year in tuple(range(2008, 2017)):
         filepath = (f'GlobalGWR_PM25_GL_{year}01_{year}'
                     '12-RH35_NoDust_NoSalt.nc')
+
     else:
         raise ValueError(f"Incorrect `year` {year}")
 
