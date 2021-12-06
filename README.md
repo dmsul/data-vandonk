@@ -5,7 +5,7 @@ and reformat the data into pandas DataFrames.
 
 # Using package
 
-1. Clone (i.e., install) code.
+1. Clone/download this code.
 2. The variable `DATA_PATH` in the file `data_vandonk/util/env.py` specifies
    where on your computer you want to save data files, including both raw
    downloads and intermediate files created by this code. It is currently set
@@ -13,9 +13,12 @@ and reformat the data into pandas DataFrames.
    your data to be somewhere else, you will need to change the value of
    `DATA_PATH`. You may also want to change the format of the intermediate file
    that is stored (see Step 5 below).
-3. Install the `data_vandonk` python package. Inside the `data_vandonk`
-   directory, run: `python setup.py install`. This may require that you install
-   other packages, such as pandas and econtools.
+3. Install the `data_vandonk` python package. After you have cloned this
+   repository, open a command line and navigate to the repository, which by
+   default will be a folder called `data-vandonk`.
+   Inside this folder, run: `python setup.py install`.
+   This may require that you install other python packages, such as pandas and
+   econtools.
 4. Download raw files using the `batch_download_vandonk_monthly` function.
    Where these files are saved is determined by the `DATA_PATH` variable (see
    Step 2 above). 
