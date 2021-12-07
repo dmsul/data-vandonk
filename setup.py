@@ -17,7 +17,6 @@ dependencies = [
     'econtools',
     'xarray',
     'pandas',
-    'cartopy',
 ]
 
 setup(
