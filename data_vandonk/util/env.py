@@ -6,7 +6,7 @@ PROJECT_NAME = 'data-vandonk'
 
 # Check which machine we're on
 HOST = socket.gethostname()
-if HOST in ('sullivan-7d', 'sullivan-10d', 'DESKTOP-HOME', 'ThinkPad-PC'):
+if HOST in ('sullivan-7d', 'sullivan-10d', 'HOME-DESKTOP', 'ThinkPad-PC'):
     data_root = "D:\\"
 else:
     data_root = r'\\Sullivan-10d'

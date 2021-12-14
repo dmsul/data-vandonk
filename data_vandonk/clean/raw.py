@@ -109,7 +109,7 @@ def vandonk_month_local_path(year: int, month: int, species: str) -> str:
     str_mo = str(month).zfill(2)
     local_path = src_path(
         'monthly',
-        f'GWRwSPEC_PM25_NA_{year}{str_mo}_{year}{str_mo}-RH35.nc')
+        f'V4NA03_PM25_NA_{year}{str_mo}_{year}{str_mo}-RH35.nc')
     return local_path
 
 
